@@ -1,4 +1,13 @@
-<x-app-layout>
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
 
     <!-- Hero Section -->
     <section class="pt-24 md:pt-0 relative flex items-center h-screen bg-cover bg-center"
@@ -77,50 +86,53 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Property Card 1 -->
-                @foreach ($announcements as $announcement)
+                <?php $__currentLoopData = $announcements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $announcement): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
                         <div class="overflow-hidden">
                             <img class="w-full h-56 object-cover property-img"
-                                src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                                src=<?php echo e(asset('storage/' . $announcement->images->first()->path)); ?> alt="Luxury Villa">
                         </div>
                         <div class="p-6">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $announcement->title }}</h3>
-                            <p class="text-gray-600 mb-4">{{ $announcement->description }}</p>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2"><?php echo e($announcement->title); ?></h3>
+                            <p class="text-gray-600 mb-4"><?php echo e($announcement->description); ?></p>
                             <div class="flex justify-between items-center mb-4">
-                                <span class="text-2xl font-bold text-blue-600">${{ $announcement->price }}</span>
-                                @if ($announcement->type == 'For Sale')
+                                <span class="text-2xl font-bold text-blue-600">$<?php echo e($announcement->price); ?></span>
+                                <?php if($announcement->type == 'For Sale'): ?>
                                     <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                                        {{ $announcement->type }}
+                                        <?php echo e($announcement->type); ?>
+
                                     </span>
-                                @else
+                                <?php else: ?>
                                     <span
                                         class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
-                                        {{ $announcement->type }}
+                                        <?php echo e($announcement->type); ?>
+
                                     </span>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             <div class="flex justify-between text-gray-500">
                                 <div class="flex items-center">
                                     <i class="fas fa-bed mr-1"></i>
-                                    <span>{{ $announcement->Beds }} Beds</span>
+                                    <span><?php echo e($announcement->Beds); ?> Beds</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-bath mr-1"></i>
-                                    <span>{{ $announcement->Baths }} Baths</span>
+                                    <span><?php echo e($announcement->Baths); ?> Baths</span>
                                 </div>
                                 <div class="flex items-center">
                                     <i class="fas fa-ruler-combined mr-1"></i>
-                                    <span>{{ $announcement->sqft }} sqft</span>
+                                    <span><?php echo e($announcement->sqft); ?> sqft</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                @endforeach
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
             </div>
 
             <div class="text-center mt-12">
-                <a href={{ route("announcements") }}
+                <a href=<?php echo e(route("announcements")); ?>
+
                     class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition">
                     View All Properties
                     <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -295,4 +307,14 @@
         </div>
     </footer>
 
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\hp\Desktop\TA\touristay\resources\views/home.blade.php ENDPATH**/ ?>

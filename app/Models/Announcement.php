@@ -14,11 +14,19 @@ class Announcement extends Model
         'description',
         'user_id',
         'address',
+        'Beds',
+        'Baths',
+        'sqft',
+        'type',
+        'price',
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function images(){
+        return $this->hasMany(Image::class,'announcement_id');
     }
 }
 

@@ -12,16 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('announcements', function (Blueprint $table) {
-            $table->integer("Beds");
-            $table->integer("Baths");
-            $table->float("sqft");
-            $table->enum("type",["For Sale","For Rent"]);
+            $table->float("price");
         });
     }
 
     /**
      * Reverse the migrations.
-     */ 
+     */
     public function down(): void
     {
         Schema::table('announcements', function (Blueprint $table) {

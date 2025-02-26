@@ -1,14 +1,42 @@
-<x-app-layout>
+<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
+<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('app-layout'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
     <div class="min-h-screen container mx-auto">
         <div class="flex items-center justify-between">
             <h1 class="text-2xl my-5 font-extrabold">Announcements</h1>
-            <x-announcement_modal />
+            <?php if (isset($component)) { $__componentOriginal6dfdb11e77edf4711bb734da15a36bbb = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.announcement_modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('announcement_modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb)): ?>
+<?php $attributes = $__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb; ?>
+<?php unset($__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal6dfdb11e77edf4711bb734da15a36bbb)): ?>
+<?php $component = $__componentOriginal6dfdb11e77edf4711bb734da15a36bbb; ?>
+<?php unset($__componentOriginal6dfdb11e77edf4711bb734da15a36bbb); ?>
+<?php endif; ?>
         </div>
-        @if (session('success'))
+        <?php if(session('success')): ?>
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2">
-                <p>{{ session('success') }}</p>
+                <p><?php echo e(session('success')); ?></p>
             </div>
-        @endif
+        <?php endif; ?>
     </div>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">
@@ -96,4 +124,14 @@
             </div>
         </div>
     </footer>
-</x-app-layout>
+ <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
+<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
+<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
+<?php endif; ?>
+<?php /**PATH C:\Users\hp\Desktop\TA\touristay\resources\views/announcements.blade.php ENDPATH**/ ?>
