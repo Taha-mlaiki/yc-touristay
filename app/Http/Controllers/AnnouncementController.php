@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class AnnouncementController extends Controller
 {
     //
-    public function index()
+    public function index(Request $req)
     {
-        $announcements = Announcement::with("images")->get();
-        return view("announcements",compact("announcements"));
+        $num = 4 ;
+        if ($req->input("slots")) {
+            $num = $req->input("slots");
+        }
+        $announcements = Announcement::with("images")->paginate($num)->appends($req->query());
+        return view("announcements", compact("announcements"));
     }
     public function create(Request $req)
     {

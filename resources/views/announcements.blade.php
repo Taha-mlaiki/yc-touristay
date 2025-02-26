@@ -4,6 +4,28 @@
             <h1 class="text-2xl font-extrabold">Announcements</h1>
             <x-announcement_modal />
         </div>
+        <div class="flex gap-4">
+            <h4 class="font-bold text-lg">Pagination slots :</h4>
+            <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                <input type="hidden" value="4" name="slots">
+                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 4 ? 'text-black bg-white' : 'bg-black w-full text-white' }}">
+                    4
+                </button>
+            </form>
+            <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                <input type="hidden" value="10" name="slots">
+                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 10 ? 'text-black bg-white' : 'bg-black w-full text-white' }}">
+                    10
+                </button>
+            </form>
+            <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                <input type="hidden" value="25" name="slots">
+                <button
+                    class="rounded-xl py-1 font-bold w-full {{ request('slots') == 25 ? 'text-black bg-white' : 'bg-black w-full text-white' }} ">
+                    25
+                </button>
+            </form>
+        </div>
         @if (session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2">
                 <p>{{ session('success') }}</p>
@@ -12,12 +34,16 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             @foreach ($announcements as $announcement)
-                <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
+                <div class="bg-white flex flex-col justify-between rounded-lg overflow-hidden shadow-lg property-card">
                     <div class="overflow-hidden">
-                        <img class="w-full h-56 object-cover property-img"
-                            src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                        @if (empty($announcement->images->first()->path))
+                            <div class="w-full h-56 bg-black"></div>
+                        @else
+                            <img class="w-full h-56 object-cover property-img"
+                                src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                        @endif
                     </div>
-                    <div class="p-6">
+                    <div class="px-6 py-4">
                         <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $announcement->title }}</h3>
                         <p class="text-gray-600 mb-4">{{ $announcement->description }}</p>
                         <div class="flex justify-between items-center mb-4">
@@ -46,17 +72,20 @@
                                 <span>{{ $announcement->sqft }} sqft</span>
                             </div>
                         </div>
-                        <div>
-                            <a href="">
-                                <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
-                                    View Details
-                                </button>
-                            </a>
-                        </div>
+                    </div>
+                    <div class="px-6 py-4 pb-5">
+                        <a href="">
+                            <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
+                                View Details
+                            </button>
+                        </a>
                     </div>
                 </div>
             @endforeach
 
+        </div>
+        <div class="flex items-center my-10 justify-center">
+            {{ $announcements->appends(request()->query())->links() }}
         </div>
     </div>
     <!-- Footer -->
@@ -145,4 +174,5 @@
             </div>
         </div>
     </footer>
+
 </x-app-layout>

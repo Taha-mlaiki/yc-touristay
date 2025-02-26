@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Announcement;
 use App\Models\Role;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -14,12 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::factory()->create([
-            'name' => "owner"
-        ]);
+        // Role::factory()->create([
+        //     'name' => "owner"
+        // ]);
 
-        Role::factory()->create([
-            'name' => "touriste"
-        ]);
+        // Role::factory()->create([
+        //     'name' => "touriste"
+        // ]);
+        Announcement::factory()->count(20)->create();
     }
 }
