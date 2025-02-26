@@ -1,7 +1,5 @@
 <x-guest-layout>
-
-    {{ $errors->first() }}
-
+    <h1 class="font-extrabold text-center py-4 text-4xl ">Touris<span class="text-blue-500">Stay</span></h1>
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
