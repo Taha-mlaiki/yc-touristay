@@ -76,7 +76,6 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Property Card 1 -->
                 @foreach ($announcements as $announcement)
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
                         <div class="overflow-hidden">

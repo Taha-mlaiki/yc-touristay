@@ -9,8 +9,8 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
     <div class="min-h-screen container mx-auto">
-        <div class="flex items-center justify-between">
-            <h1 class="text-2xl my-5 font-extrabold">Announcements</h1>
+        <div class="flex my-10 items-center justify-between">
+            <h1 class="text-2xl font-extrabold">Announcements</h1>
             <?php if (isset($component)) { $__componentOriginal6dfdb11e77edf4711bb734da15a36bbb = $component; } ?>
 <?php if (isset($attributes)) { $__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb = $attributes; } ?>
 <?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.announcement_modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
@@ -37,6 +37,57 @@
                 <p><?php echo e(session('success')); ?></p>
             </div>
         <?php endif; ?>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            <?php $__currentLoopData = $announcements; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $announcement): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
+                    <div class="overflow-hidden">
+                        <img class="w-full h-56 object-cover property-img"
+                            src=<?php echo e(asset('storage/' . $announcement->images->first()->path)); ?> alt="Luxury Villa">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2"><?php echo e($announcement->title); ?></h3>
+                        <p class="text-gray-600 mb-4"><?php echo e($announcement->description); ?></p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-blue-600">$<?php echo e($announcement->price); ?></span>
+                            <?php if($announcement->type == 'For Sale'): ?>
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    <?php echo e($announcement->type); ?>
+
+                                </span>
+                            <?php else: ?>
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    <?php echo e($announcement->type); ?>
+
+                                </span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="flex justify-between text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-bed mr-1"></i>
+                                <span><?php echo e($announcement->Beds); ?> Beds</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-1"></i>
+                                <span><?php echo e($announcement->Baths); ?> Baths</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-ruler-combined mr-1"></i>
+                                <span><?php echo e($announcement->sqft); ?> sqft</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="">
+                                <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
+                                    View Details
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+        </div>
     </div>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">

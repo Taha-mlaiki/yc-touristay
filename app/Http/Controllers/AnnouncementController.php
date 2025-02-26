@@ -12,7 +12,8 @@ class AnnouncementController extends Controller
     //
     public function index()
     {
-        return view("announcements");
+        $announcements = Announcement::with("images")->get();
+        return view("announcements",compact("announcements"));
     }
     public function create(Request $req)
     {

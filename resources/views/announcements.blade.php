@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="min-h-screen container mx-auto">
-        <div class="flex items-center justify-between">
-            <h1 class="text-2xl my-5 font-extrabold">Announcements</h1>
+        <div class="flex my-10 items-center justify-between">
+            <h1 class="text-2xl font-extrabold">Announcements</h1>
             <x-announcement_modal />
         </div>
         @if (session('success'))
@@ -9,6 +9,55 @@
                 <p>{{ session('success') }}</p>
             </div>
         @endif
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
+            @foreach ($announcements as $announcement)
+                <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
+                    <div class="overflow-hidden">
+                        <img class="w-full h-56 object-cover property-img"
+                            src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $announcement->title }}</h3>
+                        <p class="text-gray-600 mb-4">{{ $announcement->description }}</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-2xl font-bold text-blue-600">${{ $announcement->price }}</span>
+                            @if ($announcement->type == 'For Sale')
+                                <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    {{ $announcement->type }}
+                                </span>
+                            @else
+                                <span class="bg-green-100 text-green-800 text-xs font-semibold px-2.5 py-0.5 rounded">
+                                    {{ $announcement->type }}
+                                </span>
+                            @endif
+                        </div>
+                        <div class="flex justify-between text-gray-500">
+                            <div class="flex items-center">
+                                <i class="fas fa-bed mr-1"></i>
+                                <span>{{ $announcement->Beds }} Beds</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bath mr-1"></i>
+                                <span>{{ $announcement->Baths }} Baths</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-ruler-combined mr-1"></i>
+                                <span>{{ $announcement->sqft }} sqft</span>
+                            </div>
+                        </div>
+                        <div>
+                            <a href="">
+                                <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
+                                    View Details
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
     </div>
     <!-- Footer -->
     <footer class="bg-gray-900 text-white">
