@@ -8,7 +8,7 @@
             <h4 class="font-bold text-lg">Pagination slots :</h4>
             <form action={{ route('announcements') }} method="GET" class="w-20 ">
                 <input type="hidden" value="4" name="slots">
-                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 4 ? 'text-black bg-white' : 'bg-black w-full text-white' }}">
+                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 4 ? 'text-black bg-white' : 'bg-black text-white' }}">
                     4
                 </button>
             </form>
@@ -34,8 +34,8 @@
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             @foreach ($announcements as $announcement)
-                <div class="bg-white flex flex-col justify-between rounded-lg overflow-hidden shadow-lg property-card">
-                    <div class="overflow-hidden">
+                <div class="bg-white flex flex-col justify-between rounded-lg overflow-hidden shadow-lg  property-card">
+                    <div class="overflow-hidden relative">
                         @if (empty($announcement->images->first()->path))
                             <div class="w-full h-56 bg-black"></div>
                         @else
@@ -43,8 +43,8 @@
                                 src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
                         @endif
                     </div>
-                    <div class="px-6 py-4">
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $announcement->title }}</h3>
+                    <div class="px-6 py-4 relative">
+                        <h3 class="text-xl font-bold text-gray-800 mb-2 w-[90%]">{{ $announcement->title }}</h3>
                         <p class="text-gray-600 mb-4">{{ $announcement->description }}</p>
                         <div class="flex justify-between items-center mb-4">
                             <span class="text-2xl font-bold text-blue-600">${{ $announcement->price }}</span>
@@ -72,6 +72,25 @@
                                 <span>{{ $announcement->sqft }} sqft</span>
                             </div>
                         </div>
+                        @if(in_array($announcement->id,$favoritedIds))
+                        <form action={{ route("favorites.delete") }} method="POST">
+                            @csrf
+                            <input type="hidden" value="0" name="heart">
+                            <input type="hidden" value={{ $announcement->id }} name="announcement_id">
+                            <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                <img src={{ asset("storage/assets/filledHeart.png") }} alt=""  class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                            </button>
+                        </form>
+                        @else
+                        <form action={{ route("favorites.create") }} method="POST">
+                            @csrf
+                            <input type="hidden" value="0" name="heart">
+                            <input type="hidden" value={{ $announcement->id }} name="announcement_id">
+                            <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                <img src={{ asset("storage/assets/heart.svg") }} alt=""  class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                            </button>
+                        </form>
+                        @endif
                     </div>
                     <div class="px-6 py-4 pb-5">
                         <a href="">

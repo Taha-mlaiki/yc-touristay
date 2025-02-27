@@ -30,11 +30,14 @@
                             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                                 {{ __('Home') }}
                             </x-nav-link>
-                        @break
-                    @endswitch
-                    <x-nav-link :href="route('announcements')" :active="request()->routeIs('announcements')">
-                        {{ __('Announcement') }}
-                    </x-nav-link>
+                            @break
+                            @endswitch
+                            <x-nav-link :href="route('announcements')" :active="request()->routeIs('announcements')">
+                                {{ __('Announcement') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('favorites')" :active="request()->routeIs('favorites')">
+                                {{ __('favorites') }}
+                            </x-nav-link>
                 </div>
             </div>
 

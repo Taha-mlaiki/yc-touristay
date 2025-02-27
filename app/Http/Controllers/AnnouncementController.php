@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Announcement;
+use App\Models\Favorit;
 use App\Models\Image;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,12 +13,11 @@ class AnnouncementController extends Controller
     //
     public function index(Request $req)
     {
-        $num = 4 ;
-        if ($req->input("slots")) {
-            $num = $req->input("slots");
-        }
-        $announcements = Announcement::with("images")->paginate($num)->appends($req->query());
-        return view("announcements", compact("announcements"));
+        $user = Auth::user();  
+        $favoritedIds = $user->favorites->pluck('id')->toArray(); 
+        $num = $req->input('slots', 4);
+        $announcements = Announcement::with('images')->paginate($num)->appends($req->query());
+        return view('announcements', compact('announcements', 'favoritedIds'));
     }
     public function create(Request $req)
     {

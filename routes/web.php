@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnnouncementController;
+use App\Http\Controllers\FavoritController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Auth;
@@ -23,6 +24,12 @@ Route::middleware("auth")->group(function () {
     Route::get('/announcements', [AnnouncementController::class, "index"])->name("announcements");
 
     Route::post('/announcements', [AnnouncementController::class, "create"])->name("announcements.create");
+
+
+    Route::get('/favorites', [FavoritController::class, "index"])->name("favorites");
+
+    Route::post('/favorites/add', [FavoritController::class, "create"])->name("favorites.create");
+    Route::post('/favorites/remove', [FavoritController::class, "delete"])->name("favorites.delete");
 });
 
 

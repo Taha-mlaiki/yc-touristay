@@ -51,4 +51,7 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+    public function favorites(){
+        return $this->belongsToMany(Announcement::class,"favorits","user_id","announcement_id");
+    }
 }
