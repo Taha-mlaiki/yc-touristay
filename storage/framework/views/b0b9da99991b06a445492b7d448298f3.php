@@ -123,7 +123,7 @@
                         <?php endif; ?>
                     </div>
                     <div class="px-6 py-4 pb-5">
-                        <a href="">
+                        <a href="/announcements/<?php echo e($announcement->id); ?>">
                             <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
                                 View Details
                             </button>

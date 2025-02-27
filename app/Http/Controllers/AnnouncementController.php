@@ -63,4 +63,10 @@ class AnnouncementController extends Controller
             dd($th->getMessage());
         }
     }
+
+    public function details($announcement_id){
+        $user_id = Auth::user()->id ;
+        $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
+        return view("announcement_details",compact("announcement"));
+    }
 }

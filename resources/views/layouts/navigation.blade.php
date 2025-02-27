@@ -24,6 +24,9 @@
                             <x-nav-link :href="route('owner.dashboard')" :active="request()->routeIs('owner.dashboard')">
                                 {{ __('Dashboard') }}
                             </x-nav-link>
+                            <x-nav-link :href="route('owner.announcements')" :active="request()->routeIs('owner.announcements')">
+                                {{ __('My Annoucements') }}
+                            </x-nav-link>
                         @break
 
                         @case('touriste')

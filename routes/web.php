@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\FavoritController;
+use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Auth;
@@ -17,6 +18,8 @@ Route::middleware("auth")->group(function () {
         return view("owner.dashboard");
     })->name("owner.dashboard");
 
+    Route::get('/owner/announcements', [OwnerController::class, "announcements"])->name("owner.announcements");
+
     Route::get('/admin/dashbaord', function () {
         return view("admin.dashboard");
     })->name("admin.dashboard");
@@ -24,6 +27,7 @@ Route::middleware("auth")->group(function () {
     Route::get('/announcements', [AnnouncementController::class, "index"])->name("announcements");
 
     Route::post('/announcements', [AnnouncementController::class, "create"])->name("announcements.create");
+    Route::get('/announcements/{id}', [AnnouncementController::class, "details"]);
 
 
     Route::get('/favorites', [FavoritController::class, "index"])->name("favorites");
