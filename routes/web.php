@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\FavoritController;
 use App\Http\Controllers\OwnerController;
@@ -20,9 +21,7 @@ Route::middleware("auth")->group(function () {
 
     Route::get('/owner/announcements', [OwnerController::class, "announcements"])->name("owner.announcements");
 
-    Route::get('/admin/dashbaord', function () {
-        return view("admin.dashboard");
-    })->name("admin.dashboard");
+    Route::get('/admin/dashbaord', [AdminController::class, 'dashboard'])->name("admin.dashboard");
 
     Route::get('/announcements', [AnnouncementController::class, "index"])->name("announcements");
 
