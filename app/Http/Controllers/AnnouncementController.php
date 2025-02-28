@@ -27,6 +27,7 @@ class AnnouncementController extends Controller
             ->when($city, function ($query, $city) {
                 $query->where('city', 'LIKE', "%{$city}%"); // Search by city
             })
+            ->where("isActive",true)
             ->when($date, function ($query, $date) {
                 // Ensure the date is within the announcement's start_date and end_date range
                 $query->whereDate('start_date', '<=', $date)
@@ -87,8 +88,6 @@ class AnnouncementController extends Controller
             dd($th->getMessage());
         }
     }
-
-
 
     public function details($announcement_id)
     {
@@ -155,6 +154,19 @@ class AnnouncementController extends Controller
             return redirect()->route('announcements');
         } catch (\Throwable $th) {
             dd($th->getMessage());
+        }
+    }
+
+    public function disable(Request $req)
+    {
+        try {
+            $announcement_id = $req->announcement_id;
+            $announcement = Announcement::findOrFail($announcement_id);
+            $announcement->isActive = false;
+            $announcement->save();
+            return redirect()->back()->with("success", "Announcement archived successfully!");
+        } catch (\Throwable $th) {
+            return redirect()->back()->with("error", "Failed to archive announcement.");
         }
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware("auth")->group(function () {
     Route::get('/home', function () {
-        $announcements = Announcement::with("images")->latest()->take(3)->get();
+        $announcements = Announcement::with("images")->where("isActive",true)->latest()->take(3)->get();
         return view("home", compact('announcements'));
     })->name("home");
 
@@ -24,6 +24,7 @@ Route::middleware("auth")->group(function () {
     Route::get('/admin/dashbaord', [AdminController::class, 'dashboard'])->name("admin.dashboard");
 
     Route::get('/announcements', [AnnouncementController::class, "index"])->name("announcements");
+    Route::delete('/announcements', [AnnouncementController::class, "disable"])->name("announcement_disable");
 
     Route::post('/announcements', [AnnouncementController::class, "create"])->name("announcements.create");
     Route::get('/announcements/{id}', [AnnouncementController::class, "details"]);
