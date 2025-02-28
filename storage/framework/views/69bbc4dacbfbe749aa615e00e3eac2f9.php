@@ -101,8 +101,9 @@
                                 </svg>
                                 <span>Edit Property</span>
                             </a>
-                            <form action="" class="w-full">
-                                <input type="hidden" name="announcement_id">
+                            <form action=<?php echo e(route("announcements.delete")); ?> method="POST" class="w-full">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="announcement_id" value=<?php echo e($announcement->id); ?>>
                                 <button type="submit"
                                     class="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"

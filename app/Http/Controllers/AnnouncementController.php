@@ -69,4 +69,19 @@ class AnnouncementController extends Controller
         $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
         return view("announcement_details",compact("announcement"));
     }
+    public function update($announcement_id){
+        $user_id = Auth::user()->id ;
+        $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
+        return view("announcement_details",compact("announcement"));
+    }
+    public function delete(Request $req)
+    {
+        try {
+            $announcement = Announcement::where('id', $req->announcement_id)->firstOrFail();
+            $announcement->delete();
+            return redirect()->route('announcements');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
+    }
 }

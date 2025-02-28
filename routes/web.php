@@ -28,6 +28,8 @@ Route::middleware("auth")->group(function () {
 
     Route::post('/announcements', [AnnouncementController::class, "create"])->name("announcements.create");
     Route::get('/announcements/{id}', [AnnouncementController::class, "details"]);
+    Route::get('/announcements/update/{id}', [AnnouncementController::class, "details"]);
+    Route::post('/announcements/delete', [AnnouncementController::class, "delete"])->name("announcements.delete");
 
 
     Route::get('/favorites', [FavoritController::class, "index"])->name("favorites");

@@ -12,7 +12,7 @@
         <div class="flex my-10 items-center justify-between">
             <h1 class="text-2xl font-extrabold">Favorites</h1>
         </div>
- 
+
         <?php if(session('success')): ?>
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2">
                 <p><?php echo e(session('success')); ?></p>
@@ -64,17 +64,18 @@
                                 <span><?php echo e($announcement->sqft); ?> sqft</span>
                             </div>
                         </div>
-                        <form action=<?php echo e(route("favorites.delete")); ?> method="POST">
+                        <form action=<?php echo e(route('favorites.delete')); ?> method="POST">
                             <?php echo csrf_field(); ?>
                             <input type="hidden" value="0" name="heart">
                             <input type="hidden" value=<?php echo e($announcement->id); ?> name="announcement_id">
                             <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
-                                <img src=<?php echo e(asset("storage/assets/filledHeart.png")); ?> alt=""  class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                <img src=<?php echo e(asset('storage/assets/filledHeart.png')); ?> alt=""
+                                    class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
                             </button>
                         </form>
                     </div>
                     <div class="px-6 py-4 pb-5">
-                        <a href="">
+                        <a href="/announcements/<?php echo e($announcement->id); ?>">
                             <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
                                 View Details
                             </button>
