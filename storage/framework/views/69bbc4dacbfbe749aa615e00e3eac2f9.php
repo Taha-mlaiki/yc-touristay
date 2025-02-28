@@ -117,6 +117,26 @@
                         </div>
                     </div>
                 <?php endif; ?>
+                <?php if(Auth::user()->role->name == "admin"): ?>
+                    <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Property Actions</h3>
+                        <div class="flex flex-col gap-3">
+                            <form action=<?php echo e(route("announcements.delete")); ?> method="POST" class="w-full">
+                                <?php echo csrf_field(); ?>
+                                <input type="hidden" name="announcement_id" value=<?php echo e($announcement->id); ?>>
+                                <button type="submit"
+                                    class="w-full flex items-center justify-center gap-2 bg-red-500 hover:bg-red-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                    <span>Delete Property</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                <?php endif; ?>
 
                 <!-- Price Card -->
                 <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-xl overflow-hidden">

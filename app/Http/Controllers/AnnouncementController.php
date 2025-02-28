@@ -13,8 +13,8 @@ class AnnouncementController extends Controller
     //
     public function index(Request $req)
     {
-        $user = Auth::user();  
-        $favoritedIds = $user->favorites->pluck('id')->toArray(); 
+        $user = Auth::user();
+        $favoritedIds = $user->favorites->pluck('id')->toArray();
         $num = $req->input('slots', 4);
         $announcements = Announcement::with('images')->paginate($num)->appends($req->query());
         return view('announcements', compact('announcements', 'favoritedIds'));
@@ -34,7 +34,10 @@ class AnnouncementController extends Controller
                 'baths' => ['required', 'integer', 'min:1'],
                 'sqft' => ['required', 'integer', 'min:1'],
                 'type' => ['required', 'in:For Sale,For Rent'],
-                'price' => ['required', 'numeric'], // numeric means the field under validation must be a number
+                'price' => ['required', 'numeric'],
+                'start_date' => ['required', 'date'],
+                'end_date' => ['required', 'date'],
+                'city' => ['required', 'string'],
             ]);
             $announcement = Announcement::create([
                 'title' => $validated['title'],
@@ -46,6 +49,9 @@ class AnnouncementController extends Controller
                 'sqft' => $validated['sqft'],
                 'type' => $validated['type'],
                 'price' => $validated['price'],
+                'start_date' => $validated['start_date'],
+                'end_date' => $validated['end_date'],
+                'city' => $validated['city'],
             ]);
 
             if ($req->hasFile('images')) {
@@ -57,7 +63,6 @@ class AnnouncementController extends Controller
                     ]);
                 }
             }
-
             return redirect()->back()->with('success', 'Announcement created successfully!');
         } catch (\Throwable $th) {
             dd($th->getMessage());
@@ -66,18 +71,21 @@ class AnnouncementController extends Controller
 
 
 
-    public function details($announcement_id){
-        $user_id = Auth::user()->id ;
-        $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
-        return view("announcement_details",compact("announcement"));
+    public function details($announcement_id)
+    {
+        $user_id = Auth::user()->id;
+        $announcement = Announcement::with("images")->where("user_id", $user_id)->findOrFail($announcement_id);
+        return view("announcement_details", compact("announcement"));
     }
-    public function showUpdate($announcement_id){
-        $user_id = Auth::user()->id ;
+    public function showUpdate($announcement_id)
+    {
+        $user_id = Auth::user()->id;
         $announcement = Announcement::with("images")->findOrFail($announcement_id);
         $title = ($announcement->title);
-        return view("owner.announcement_edit",compact("announcement", "title"));
+        return view("owner.announcement_edit", compact("announcement", "title"));
     }
-    public function update(Request $req){
+    public function update(Request $req)
+    {
         $validated = $req->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -87,6 +95,9 @@ class AnnouncementController extends Controller
             'sqft' => 'required|numeric',
             'type' => 'required|in:For Sale,For Rent',
             'price' => 'required|numeric',
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date'],
+            'city' => ['required', 'string'],
         ]);
         try {
             $announcement = Announcement::where('id', $req->announcement_id)->firstOrFail();
@@ -99,6 +110,9 @@ class AnnouncementController extends Controller
                 'sqft' => $validated['sqft'],
                 'type' => $validated['type'],
                 'price' => $validated['price'],
+                'start_date' => $validated['start_date'],
+                'end_date' => $validated['end_date'],
+                'city' => $validated['city'],
             ]);
             if ($req->hasFile('images')) {
                 foreach ($req->file('images') as $image) {
@@ -109,7 +123,7 @@ class AnnouncementController extends Controller
                     ]);
                 }
             }
-            return redirect()->route("announcement_edit",$req->announcement_id)->with('success', 'Announcement updated successfully!');
+            return redirect()->route("announcement_edit", $req->announcement_id)->with('success', 'Announcement updated successfully!');
         } catch (\Throwable $th) {
             dd($th->getMessage());
         }

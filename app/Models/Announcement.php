@@ -21,7 +21,10 @@ class Announcement extends Model
         'Baths',
         'sqft',
         'type',
-        'price',
+        'start_date',
+        'end_date',
+        'city',
+        "price"
     ];
 
     public function user(): BelongsTo

@@ -5,7 +5,8 @@
 
 <!-- Modal (unchanged structure) -->
 <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
+    <div
+        class="bg-white rounded-xl shadow-2xl w-full max-w-2xl transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
         <!-- Modal Header (unchanged) -->
         <div class="p-6 border-b border-gray-200 flex justify-between items-center">
             <h2 class="text-2xl font-bold text-gray-800">New Announcement</h2>
@@ -13,33 +14,38 @@
         </div>
 
         <!-- Modal Body -->
-        <form id="announcementForm" class="p-6 space-y-6" method="POST" action="{{ route('announcements.create') }}" enctype="multipart/form-data">
+        <form id="announcementForm" class="p-6 space-y-6" method="POST" action="{{ route('announcements.create') }}"
+            enctype="multipart/form-data">
             <!-- Title -->
             @csrf
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                <input type="text" name="title" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="text" name="title"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 <span class="error text-red-500 text-sm mt-1 hidden"></span>
             </div>
 
             <!-- Description -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-                <textarea name="description" rows="4" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
+                <textarea name="description" rows="4"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"></textarea>
                 <span class="error text-red-500 text-sm mt-1 hidden"></span>
             </div>
 
             <!-- Address -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                <input type="text" name="address" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <input type="text" name="address"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                 <span class="error text-red-500 text-sm mt-1 hidden"></span>
             </div>
 
             <!-- Images -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Images</label>
-                <input type="file" name="images[]" accept="image/*" multiple class="w-full p-3 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
+                <input type="file" name="images[]" accept="image/*" multiple
+                    class="w-full p-3 border border-gray-300 rounded-lg file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100">
                 <span class="error text-red-500 text-sm mt-1 hidden"></span>
             </div>
 
@@ -48,26 +54,48 @@
                 <!-- Beds -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Beds</label>
-                    <input type="number" name="beds" min="0" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" name="beds" min="0"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <span class="error text-red-500 text-sm mt-1 hidden"></span>
                 </div>
 
                 <!-- Baths -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Baths</label>
-                    <input type="number" name="baths" min="0" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" name="baths" min="0"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <span class="error text-red-500 text-sm mt-1 hidden"></span>
                 </div>
 
                 <!-- Square Feet -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Square Feet</label>
-                    <input type="number" name="sqft" min="0" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type="number" name="sqft" min="0"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
+                    <input type='date' name="start_date"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">End date</label>
+                    <input type='date' name="end_date"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                    <input type='text' name="city"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <span class="error text-red-500 text-sm mt-1 hidden"></span>
                 </div>
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
-                    <input type='number' name="price" step="0.01" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                    <input type='number' name="price" step="0.01"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <span class="error text-red-500 text-sm mt-1 hidden"></span>
                 </div>
             </div>
@@ -75,7 +103,8 @@
             <!-- Type -->
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">Type</label>
-                <select name="type" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                <select name="type"
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
                     <option value="">Select Type</option>
                     <option value="For Sale">For Sale</option>
                     <option value="For Rent">For Rent</option>
@@ -85,7 +114,8 @@
 
             <!-- Submit Button (unchanged) -->
             <div class="flex justify-end pt-4">
-                <button type="submit" class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md">
+                <button type="submit"
+                    class="bg-indigo-600 text-white px-6 py-3 rounded-lg hover:bg-indigo-700 transition duration-300 shadow-md">
                     Submit Announcement
                 </button>
             </div>
@@ -119,7 +149,7 @@
 
     // Form Validation and Submission
     const form = document.getElementById('announcementForm');
-    
+
     // Function to clear all errors
     const clearErrors = () => {
         form.querySelectorAll('.error').forEach(error => {
@@ -138,7 +168,7 @@
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        
+
         // Clear previous errors
         clearErrors();
 

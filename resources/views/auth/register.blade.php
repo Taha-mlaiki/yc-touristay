@@ -24,9 +24,8 @@
             <select name="role_id"
                 class="border-gray-300 w-full focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                 <option value="" selected>Select a role</option>
-                @foreach ($roles as $role)
-                    <option value={{ $role->id }}>{{ $role->name }}</option>
-                @endforeach
+                <option value='1'>Owner</option>
+                <option value='2'>Touriste</option>
             </select>
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
         </div>

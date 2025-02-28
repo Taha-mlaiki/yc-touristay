@@ -123,6 +123,13 @@
                                     <span><?php echo e($announcement->sqft); ?> sqft</span>
                                 </div>
                             </div>
+                            <div class="px-6 py-4 pb-5">
+                                <a href="/announcements/<?php echo e($announcement->id); ?>">
+                                    <button class="p-2 w-full bg-blue-500 text-white rounded-lg mt-4">
+                                        View Details
+                                    </button>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -130,7 +137,7 @@
             </div>
 
             <div class="text-center mt-12">
-                <a href=<?php echo e(route("announcements")); ?>
+                <a href=<?php echo e(route('announcements')); ?>
 
                     class="inline-flex items-center text-blue-600 font-semibold hover:text-blue-800 transition">
                     View All Properties

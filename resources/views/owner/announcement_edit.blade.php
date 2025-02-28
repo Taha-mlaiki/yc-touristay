@@ -83,6 +83,24 @@
                         <span class="error text-red-500 text-sm mt-1 hidden"></span>
                     </div>
                     <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
+                        <input type='date' name="start_date" value='{{ $announcement->start_date }}'
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">End date</label>
+                        <input type='date' name="end_date" value='{{ $announcement->end_date }}'
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">City</label>
+                        <input type='text' name="city" value='{{ $announcement->city }}'
+                            class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
+                        <span class="error text-red-500 text-sm mt-1 hidden"></span>
+                    </div>
+                    <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Price</label>
                         <input type='number' name="price" step="0.01" value='{{ $announcement->price }}'
                             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500">
