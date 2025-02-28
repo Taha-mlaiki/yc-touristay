@@ -4,27 +4,57 @@
             <h1 class="text-2xl font-extrabold">Announcements</h1>
             <x-announcement_modal />
         </div>
-        <div class="flex gap-4">
-            <h4 class="font-bold text-lg">Pagination slots :</h4>
-            <form action={{ route('announcements') }} method="GET" class="w-20 ">
-                <input type="hidden" value="4" name="slots">
-                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 4 ? 'text-black bg-white' : 'bg-black text-white' }}">
-                    4
-                </button>
-            </form>
-            <form action={{ route('announcements') }} method="GET" class="w-20 ">
-                <input type="hidden" value="10" name="slots">
-                <button class="rounded-xl py-1 font-bold w-full {{ request('slots') == 10 ? 'text-black bg-white' : 'bg-black w-full text-white' }}">
-                    10
-                </button>
-            </form>
-            <form action={{ route('announcements') }} method="GET" class="w-20 ">
-                <input type="hidden" value="25" name="slots">
-                <button
-                    class="rounded-xl py-1 font-bold w-full {{ request('slots') == 25 ? 'text-black bg-white' : 'bg-black w-full text-white' }} ">
-                    25
-                </button>
-            </form>
+        <div class="flex items-start justify-between">
+            <div class="bg-white p-4 mt-10 rounded-lg w-fit shadow-lg mb-8">
+                <form action={{ route('announcements') }} method="GET" class="flex gap-x-4">
+                    <div class="col-span-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="location">City</label>
+                        <input
+                        placeholder="city"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            type="text" name="city" value="{{ request('city') }}">
+                    </div>
+                    <div class="col-span-1">
+                        <label class="block text-gray-700 text-sm font-bold mb-2" for="location">Search by date</label>
+                        <input
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
+                            type="date" id="date" name="date" value="{{ request('date') }}" placeholder="">
+                    </div>
+                    <div class="col-span-1 flex items-end">
+                        <button
+                            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition"
+                            type="submit">
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div>
+                <h4 class="font-bold text-lg">Pagination slots :</h4>
+                <div class="flex gap-4">
+                    <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                        <input type="hidden" value="4" name="slots">
+                        <button
+                            class="rounded-xl py-1 font-bold w-full {{ request('slots') == 4 ? 'text-black bg-white' : 'bg-black text-white' }}">
+                            4
+                        </button>
+                    </form>
+                    <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                        <input type="hidden" value="10" name="slots">
+                        <button
+                            class="rounded-xl py-1 font-bold w-full {{ request('slots') == 10 ? 'text-black bg-white' : 'bg-black w-full text-white' }}">
+                            10
+                        </button>
+                    </form>
+                    <form action={{ route('announcements') }} method="GET" class="w-20 ">
+                        <input type="hidden" value="25" name="slots">
+                        <button
+                            class="rounded-xl py-1 font-bold w-full {{ request('slots') == 25 ? 'text-black bg-white' : 'bg-black w-full text-white' }} ">
+                            25
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
         @if (session('success'))
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 my-2">
@@ -72,24 +102,26 @@
                                 <span>{{ $announcement->sqft }} sqft</span>
                             </div>
                         </div>
-                        @if(in_array($announcement->id,$favoritedIds))
-                        <form action={{ route("favorites.delete") }} method="POST">
-                            @csrf
-                            <input type="hidden" value="0" name="heart">
-                            <input type="hidden" value={{ $announcement->id }} name="announcement_id">
-                            <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
-                                <img src={{ asset("storage/assets/filledHeart.png") }} alt=""  class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
-                            </button>
-                        </form>
+                        @if (in_array($announcement->id, $favoritedIds))
+                            <form action={{ route('favorites.delete') }} method="POST">
+                                @csrf
+                                <input type="hidden" value="0" name="heart">
+                                <input type="hidden" value={{ $announcement->id }} name="announcement_id">
+                                <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                    <img src={{ asset('storage/assets/filledHeart.png') }} alt=""
+                                        class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                </button>
+                            </form>
                         @else
-                        <form action={{ route("favorites.create") }} method="POST">
-                            @csrf
-                            <input type="hidden" value="0" name="heart">
-                            <input type="hidden" value={{ $announcement->id }} name="announcement_id">
-                            <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
-                                <img src={{ asset("storage/assets/heart.svg") }} alt=""  class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
-                            </button>
-                        </form>
+                            <form action={{ route('favorites.create') }} method="POST">
+                                @csrf
+                                <input type="hidden" value="0" name="heart">
+                                <input type="hidden" value={{ $announcement->id }} name="announcement_id">
+                                <button type="submit" class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                    <img src={{ asset('storage/assets/heart.svg') }} alt=""
+                                        class="w-10 h-10 absolute top-2 right-2 cursor-pointer">
+                                </button>
+                            </form>
                         @endif
                     </div>
                     <div class="px-6 py-4 pb-5">

@@ -13,10 +13,29 @@ class AnnouncementController extends Controller
     //
     public function index(Request $req)
     {
+        // Get the authenticated user
         $user = Auth::user();
+
         $favoritedIds = $user->favorites->pluck('id')->toArray();
-        $num = $req->input('slots', 4);
-        $announcements = Announcement::with('images')->paginate($num)->appends($req->query());
+
+        $city = $req->input('city', ''); // City filter
+        $date = $req->input('date', null); // Date filter
+        $num = $req->input('slots', 4); // Number of results per page
+
+        // Build the query
+        $announcements = Announcement::with('images')
+            ->when($city, function ($query, $city) {
+                $query->where('city', 'LIKE', "%{$city}%"); // Search by city
+            })
+            ->when($date, function ($query, $date) {
+                // Ensure the date is within the announcement's start_date and end_date range
+                $query->whereDate('start_date', '<=', $date)
+                    ->whereDate('end_date', '>=', $date);
+            })
+            ->paginate($num)
+            ->appends($req->query()); // Preserve query parameters in pagination links
+
+        // Pass data to the view
         return view('announcements', compact('announcements', 'favoritedIds'));
     }
     public function create(Request $req)
