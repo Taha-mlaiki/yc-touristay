@@ -92,7 +92,7 @@
                     <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Property Actions</h3>
                         <div class="flex flex-col gap-3">
-                            <a href="#"
+                            <a href='/announcement/update/<?php echo e($announcement->id); ?>'
                                 class="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">

@@ -64,15 +64,55 @@ class AnnouncementController extends Controller
         }
     }
 
+
+
     public function details($announcement_id){
         $user_id = Auth::user()->id ;
         $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
         return view("announcement_details",compact("announcement"));
     }
-    public function update($announcement_id){
+    public function showUpdate($announcement_id){
         $user_id = Auth::user()->id ;
-        $announcement = Announcement::with("images")->where("user_id",$user_id)->findOrFail($announcement_id);
-        return view("announcement_details",compact("announcement"));
+        $announcement = Announcement::with("images")->findOrFail($announcement_id);
+        $title = ($announcement->title);
+        return view("owner.announcement_edit",compact("announcement", "title"));
+    }
+    public function update(Request $req){
+        $validated = $req->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'address' => 'required|string',
+            'Beds' => 'required|numeric',
+            'Baths' => 'required|numeric',
+            'sqft' => 'required|numeric',
+            'type' => 'required|in:For Sale,For Rent',
+            'price' => 'required|numeric',
+        ]);
+        try {
+            $announcement = Announcement::where('id', $req->announcement_id)->firstOrFail();
+            $announcement->update([
+                'title' => $req->title,
+                'description' => $validated['description'],
+                'address' => $validated['address'],
+                'Beds' => $validated['Beds'],
+                'Baths' => $validated['Baths'],
+                'sqft' => $validated['sqft'],
+                'type' => $validated['type'],
+                'price' => $validated['price'],
+            ]);
+            if ($req->hasFile('images')) {
+                foreach ($req->file('images') as $image) {
+                    $path = $image->store('uploads', 'public');
+                    Image::create([
+                        'announcement_id' => $announcement->id,
+                        'path' => str_replace('public/', 'storage/', $path),
+                    ]);
+                }
+            }
+            return redirect()->route("announcement_edit",$req->announcement_id)->with('success', 'Announcement updated successfully!');
+        } catch (\Throwable $th) {
+            dd($th->getMessage());
+        }
     }
     public function delete(Request $req)
     {

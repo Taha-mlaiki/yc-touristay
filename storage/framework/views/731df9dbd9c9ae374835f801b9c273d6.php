@@ -9,10 +9,32 @@
 <?php endif; ?>
 <?php $component->withAttributes([]); ?>
      <?php $__env->slot('header', null, []); ?> 
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            <?php echo e(__('My Announcements')); ?>
+        <div class="flex w-full items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                <?php echo e(__('My Announcements')); ?>
 
-        </h2>
+            </h2>
+            <?php if (isset($component)) { $__componentOriginal6dfdb11e77edf4711bb734da15a36bbb = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.announcement_modal','data' => []] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('announcement_modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes([]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb)): ?>
+<?php $attributes = $__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb; ?>
+<?php unset($__attributesOriginal6dfdb11e77edf4711bb734da15a36bbb); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal6dfdb11e77edf4711bb734da15a36bbb)): ?>
+<?php $component = $__componentOriginal6dfdb11e77edf4711bb734da15a36bbb; ?>
+<?php unset($__componentOriginal6dfdb11e77edf4711bb734da15a36bbb); ?>
+<?php endif; ?>
+        </div>
      <?php $__env->endSlot(); ?>
 
     <div class="container mx-auto">

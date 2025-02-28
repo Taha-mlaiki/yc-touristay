@@ -28,7 +28,8 @@ Route::middleware("auth")->group(function () {
 
     Route::post('/announcements', [AnnouncementController::class, "create"])->name("announcements.create");
     Route::get('/announcements/{id}', [AnnouncementController::class, "details"]);
-    Route::get('/announcements/update/{id}', [AnnouncementController::class, "details"]);
+    Route::get('/announcement/update/{id}', [AnnouncementController::class, "showUpdate"])->name("announcement_edit");
+    Route::put('/announcement/update', [AnnouncementController::class, "update"])->name("announcement_update");
     Route::post('/announcements/delete', [AnnouncementController::class, "delete"])->name("announcements.delete");
 
 
