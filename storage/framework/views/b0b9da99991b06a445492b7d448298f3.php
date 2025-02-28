@@ -37,8 +37,7 @@
                 <form action=<?php echo e(route('announcements')); ?> method="GET" class="flex gap-x-4">
                     <div class="col-span-1">
                         <label class="block text-gray-700 text-sm font-bold mb-2" for="location">City</label>
-                        <input
-                        placeholder="city"
+                        <input placeholder="city"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-600"
                             type="text" name="city" value="<?php echo e(request('city')); ?>">
                     </div>
@@ -117,6 +116,20 @@
 
                                 </span>
                             <?php endif; ?>
+                        </div>
+                        <div class="flex justify-between text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span><?php echo e($announcement->city); ?></span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>
+                                    <?php echo e(\Carbon\Carbon::parse($announcement->start_date)->format('M d')); ?> -
+                                    <?php echo e(\Carbon\Carbon::parse($announcement->end_date)->format('M d')); ?>
+
+                                </span>
+                            </div>
                         </div>
                         <div class="flex justify-between text-gray-500">
                             <div class="flex items-center">

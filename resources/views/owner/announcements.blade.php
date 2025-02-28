@@ -35,6 +35,19 @@
                                 </span>
                             @endif
                         </div>
+                        <div class="flex justify-between text-gray-500 mb-4">
+                            <div class="flex items-center">
+                                <i class="fas fa-map-marker-alt mr-1"></i>
+                                <span>{{ $announcement->city }}</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-calendar-alt mr-1"></i>
+                                <span>
+                                    {{ \Carbon\Carbon::parse($announcement->start_date)->format('M d') }} -
+                                    {{ \Carbon\Carbon::parse($announcement->end_date)->format('M d') }}
+                                </span>
+                            </div>
+                        </div>
                         <div class="flex justify-between text-gray-500">
                             <div class="flex items-center">
                                 <i class="fas fa-bed mr-1"></i>

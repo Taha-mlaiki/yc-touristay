@@ -79,8 +79,12 @@
                 @foreach ($announcements as $announcement)
                     <div class="bg-white rounded-lg overflow-hidden shadow-lg property-card">
                         <div class="overflow-hidden">
-                            <img class="w-full h-56 object-cover property-img"
-                                src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                            @if (empty($announcement->images->first()->path))
+                                <div class="w-full h-56 bg-black"></div>
+                            @else
+                                <img class="w-full h-56 object-cover property-img"
+                                    src={{ asset('storage/' . $announcement->images->first()->path) }} alt="Luxury Villa">
+                            @endif
                         </div>
                         <div class="p-6">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">{{ $announcement->title }}</h3>
@@ -97,6 +101,19 @@
                                         {{ $announcement->type }}
                                     </span>
                                 @endif
+                            </div>
+                            <div class="flex justify-between text-gray-500 mb-4">
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt mr-1"></i>
+                                    <span>{{ $announcement->city }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-calendar-alt mr-1"></i>
+                                    <span>
+                                        {{ \Carbon\Carbon::parse($announcement->start_date)->format('M d') }} - 
+                                        {{ \Carbon\Carbon::parse($announcement->end_date)->format('M d') }}
+                                    </span>
+                                </div>
                             </div>
                             <div class="flex justify-between text-gray-500">
                                 <div class="flex items-center">
@@ -122,7 +139,6 @@
                         </div>
                     </div>
                 @endforeach
-
             </div>
 
             <div class="text-center mt-12">
