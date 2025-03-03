@@ -41,5 +41,8 @@ class Announcement extends Model
     {
         return $this->belongsToMany(User::class,"favorits","announcement_id","user_id");
     }
+    public function reservations(){
+        return  $this->hasMany(Reservation::class);
+    }
 }
 

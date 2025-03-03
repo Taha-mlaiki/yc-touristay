@@ -101,7 +101,7 @@
                                 </svg>
                                 <span>Edit Property</span>
                             </a>
-                            <form action=<?php echo e(route("announcements.delete")); ?> method="POST" class="w-full">
+                            <form action=<?php echo e(route('announcements.delete')); ?> method="POST" class="w-full">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="announcement_id" value=<?php echo e($announcement->id); ?>>
                                 <button type="submit"
@@ -117,11 +117,11 @@
                         </div>
                     </div>
                 <?php endif; ?>
-                <?php if(Auth::user()->role->name == "admin"): ?>
+                <?php if(Auth::user()->role->name == 'admin'): ?>
                     <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
                         <h3 class="text-xl font-bold text-gray-800 mb-4">Property Actions</h3>
                         <div class="flex flex-col gap-3">
-                            <form action=<?php echo e(route("announcements.delete")); ?> method="POST" class="w-full">
+                            <form action=<?php echo e(route('announcements.delete')); ?> method="POST" class="w-full">
                                 <?php echo csrf_field(); ?>
                                 <input type="hidden" name="announcement_id" value=<?php echo e($announcement->id); ?>>
                                 <button type="submit"
@@ -138,6 +138,7 @@
                     </div>
                 <?php endif; ?>
 
+
                 <!-- Price Card -->
                 <div class="bg-gradient-to-br from-blue-500 to-blue-700 rounded-xl shadow-xl overflow-hidden">
                     <div class="p-6">
@@ -145,17 +146,26 @@
                             <span
                                 class="text-white text-4xl font-bold">$<?php echo e(number_format($announcement->price)); ?></span>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-blue-400 border-opacity-30">
-                            <button
-                                class="w-full bg-white text-blue-700 hover:bg-blue-50 font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
-                                    viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                                </svg>
-                                <span>Contact Agent</span>
-                            </button>
-                        </div>
+                        <?php if (isset($component)) { $__componentOriginalf437511b3f5ffb0343414062d24e6891 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginalf437511b3f5ffb0343414062d24e6891 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.reservation_modal','data' => ['reservations' => $announcement->reservations,'announcementId' => $announcement->id]] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('reservation_modal'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['reservations' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($announcement->reservations),'announcement_id' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute($announcement->id)]); ?>
+<?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginalf437511b3f5ffb0343414062d24e6891)): ?>
+<?php $attributes = $__attributesOriginalf437511b3f5ffb0343414062d24e6891; ?>
+<?php unset($__attributesOriginalf437511b3f5ffb0343414062d24e6891); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginalf437511b3f5ffb0343414062d24e6891)): ?>
+<?php $component = $__componentOriginalf437511b3f5ffb0343414062d24e6891; ?>
+<?php unset($__componentOriginalf437511b3f5ffb0343414062d24e6891); ?>
+<?php endif; ?>
                     </div>
                 </div>
             </div>

@@ -92,7 +92,7 @@ class AnnouncementController extends Controller
     public function details($announcement_id)
     {
         $user_id = Auth::user()->id;
-        $announcement = Announcement::with("images")->where("user_id", $user_id)->findOrFail($announcement_id);
+        $announcement = Announcement::with(['images', 'reservations'])->find($announcement_id);
         return view("announcement_details", compact("announcement"));
     }
     public function showUpdate($announcement_id)
